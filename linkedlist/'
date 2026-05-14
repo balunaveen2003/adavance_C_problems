@@ -1,0 +1,115 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+	int data;
+	struct node *next;
+};
+struct node *head=NULL;
+
+void creatanode(int d);
+void palidrome();
+void display();
+
+void creatanode(int d)
+{
+	struct node *new,*trav;
+	new=malloc(sizeof(struct node));
+	if(new==NULL)
+	{
+		printf("malloc is error");
+		return;
+	}
+	new->data=d;
+	new->next=NULL;
+	if(head==NULL)
+	{
+		head=new;
+		return;
+	}
+	trav=head;
+	while(trav->next != NULL)
+	{
+		trav=trav->next;
+	}
+	trav->next=new;
+}
+
+void palidrome()
+{
+	struct node *curentnode=head,*nextnode=head,*prenode=NULL;
+	struct node * head1=head;
+	int flag=0;
+	if(head==NULL)
+	{
+		printf("link is not present");
+		return;
+	}
+	while(nextnode != NULL)
+	{
+		nextnode=nextnode->next;
+		curentnode->next=prenode;
+		prenode=curentnode;
+		curentnode=nextnode;		
+	}
+	head=prenode;
+	struct node *head2=prenode;
+	struct node *p = head2;
+	struct node *p2= head1;
+
+	printf("%d\n %d\n",* p, *p2);
+	while( (p->next != NULL) && (p2->next != NULL))
+	{
+		if(p->data == p2->data)
+		{
+			//printf("it palidrome");
+			flag=0;
+		}
+		else
+		{
+			//printf("not a palidrome");
+			flag=1;
+			break;
+		}
+		
+		p=p->next;
+		p2=p2->next;
+	}
+	printf("%d",flag);
+	if(flag==1)
+	{
+		printf("not palindrome\n");
+	}
+	else
+		printf("palndrome\n");
+}
+void display()
+{
+	struct node *dis;
+	if(head==NULL)
+	{
+		printf("link is not created");
+		return;
+	}
+	dis=head;
+	while(dis != NULL)
+	{
+		printf("%d->",dis->data);
+		//printf("%p ",dis->next);
+		dis=dis->next;
+	}
+
+}
+int main()
+{
+	creatanode(10);
+	creatanode(20);
+	creatanode(30);
+	creatanode(10);
+	display();
+	printf("\n");
+	palidrome();
+	display();
+
+}

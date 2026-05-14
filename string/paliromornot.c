@@ -1,0 +1,71 @@
+#include<stdio.h>
+int main()
+{
+	char str1[100];
+	char *p1=str1;
+	char str2[100];
+	char *p2=str2;
+	char *start=str1;
+	char *end=str1;
+	printf("enter the string");
+	fgets(str1,sizeof(str1),stdin);
+	//remove newliine
+	char *temp=str1;
+	while(*temp!='\0')
+	{
+		if(*temp != '\0')
+		{
+			*temp='\0';
+			break;
+		}
+		temp++;
+	}
+	//copy one string to another string
+	while(*p1 !='\0')
+	{
+		*p2=*p1;
+		p1++;
+		p2++;
+	}
+	*p2='\0';
+	//revers string
+	while(*end !='\0')
+		end++;
+
+	end--;
+
+	while(start<end)
+	{
+		char temp=*start;
+		*start=*end;
+		*end=*start;
+		start++;
+		end--;
+
+	}
+	char *a=str1;
+	char *b=str2;
+	int flag=1;
+	while(*a != '\0')
+	{
+		if(*a!=*b)
+		{
+			flag=0;
+			break;
+
+		}
+		a++;
+		b++;
+	}
+	if(flag)
+	{
+		printf("palidrome");
+	}
+	else
+	{
+		printf("not a palidrome");
+	}
+
+
+
+}
